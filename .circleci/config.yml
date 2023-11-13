@@ -12,7 +12,7 @@ jobs:
 
       - run:
           name: Build Docker Image
-          command: docker build -t sesha10/docker-react -f Dockerfile.dev .
+          command: docker build -t sesha10/docker-react
 
       - run:
           name: Run Tests
