@@ -17,5 +17,4 @@ jobs:
       - run:
           name: Test Docker image
           command: |
-            RUN apt-get update && apt-get install -y npm
             docker run sesha10/docker-react npm run test -- --coverage
