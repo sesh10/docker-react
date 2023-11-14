@@ -1,21 +1,20 @@
 version: 2.1
 
+orbs:
+  node: circleci/node@5.0.2
+
 jobs:
   build:
-    docker:
-      - image: circleci/node:10
-        auth:
-            username: sesha10  # can specify string literal values
-            password: Badminto0  # or project environment variable reference
-
     working_directory: ~/repo
-
+    docker:
+      - image: circleci/node:alpine  # primary container, where your job's commands are run
+      
     steps:
       - checkout
 
       - run:
           name: Build Docker Image
-          command: docker build -t sesha10/docker-react -f Dockerfile.dev .
+          command: docker build -t sesha10/docker-react .
 
       - run:
           name: Run Tests
