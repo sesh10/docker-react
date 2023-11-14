@@ -4,6 +4,9 @@ jobs:
   build:
     docker:
       - image: circleci/node:10
+        auth:
+            username: sesha10  # can specify string literal values
+            password: Badminto0  # or project environment variable reference
 
     working_directory: ~/repo
 
@@ -12,7 +15,7 @@ jobs:
 
       - run:
           name: Build Docker Image
-          command: docker build -t sesha10/docker-react .
+          command: docker build -t sesha10/docker-react -f Dockerfile.dev .
 
       - run:
           name: Run Tests
