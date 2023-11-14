@@ -1,52 +1,15 @@
-version: 2.1
 
-orbs:
-  node: circleci/node@5.0.2
+version: 2.1
 
 jobs:
   build:
-    working_directory: ~/repo
     docker:
-      - image: circleci/node:alpine  # primary container, where your job's commands are run
-      
+      - image: docker:stable
     steps:
       - checkout
-
+      - setup_remote_docker
       - run:
-          name: Build Docker Image
-          command: docker build -t sesha10/docker-react .
-
-      - run:
-          name: Run Tests
-          command: docker run sesha10/docker-react npm run test -- --coverage
-
-  # deploy:
-  #   docker:
-  #     - image: circleci/python:3.7
-
-  #   working_directory: ~/repo
-
-  #   steps:
-  #     - checkout
-
-  #     - run:
-  #         name: Deploy to Elastic Beanstalk
-  #         command: |
-  #           aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
-  #           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
-  #           aws configure set region $AWS_REGION
-  #           eb deploy
-
-workflows:
-  version: 2
-  build_and_deploy:
-    jobs:
-      - build:
-          filters:
-            branches:
-              only: master
-
-      # - deploy:
-      #     filters:
-      #       branches:
-      #         only: master
+          name: Build Docker image
+          command: |
+            docker login -u sesha10 -p Baddminto0
+            docker build -t sesha10/docker-react .
