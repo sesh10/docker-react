@@ -13,3 +13,8 @@ jobs:
           command: |
             docker login -u sesha10 -p Badminto0
             docker build -t sesha10/docker-react .
+
+      - run:
+          name: Test Docker image
+          command: |
+            docker run sesha10/docker-react npm run test -- --coverage
